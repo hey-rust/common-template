@@ -1,0 +1,61 @@
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        description: 使用 rust-fmt 格式化文件。
+        entry: bash -c 'cargo fmt -- --check'
+        language: rust
+        files: \.rs$
+        args: [ ]
+      - id: cargo-deny
+        name: cargo deny check
+        description: 检查 cargo 依赖关系
+        entry: bash -c 'cargo deny check -d'
+        language: rust
+        files: \.rs$
+        args: [ ]
+      - id: typos
+        name: typos
+        description: 使用 typo 拼写检查
+        entry: bash -c 'typos'
+        language: rust
+        files: \.*$
+        pass_filenames: false
+      - id: cargo-check
+        name: cargo check
+        description: 检查包是否有错误。
+        entry: bash -c 'cargo check --all'
+        language: rust
+        files: \.rs$
+        pass_filenames: false
+      - id: cargo-clippy
+        name: cargo clippy
+        description: Lint rust sources
+        entry: bash -c 'cargo clippy --all-targets --all-features --tests --benches -- -D warnings'
+        language: rust
+        files: \.rs$
+        pass_filenames: false
+      - id: cargo-test
+        name: cargo test
+        description: 运行项目单元测试
+        entry: bash -c 'cargo nextest run --all-features'
+        language: rust
+        files: \.rs$
+        pass_filenames: false
