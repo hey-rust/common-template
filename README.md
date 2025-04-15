@@ -1,4 +1,4 @@
-# hey-rust common-template
+# {project-name}
 
 ## 环境配置
 

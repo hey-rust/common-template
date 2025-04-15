@@ -1,5 +1,5 @@
 [placeholders]
-project_name = { prompt = "请输入你的项目名称", default = "common-template", type = "string" }
+# project_name = { prompt = "请输入你的项目名称", default = "common-template", type = "string" }
 
 [template]
-ignore = [ "cliff.toml" ]
+exclude = [ "cliff.toml" ]
