@@ -1,4 +1,4 @@
-# {project-name}
+# {{ project-name }}
 
 ## 环境配置
 
